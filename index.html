@@ -10,10 +10,13 @@
 
   <!-- NAVBAR -->
   <nav class="bg-white shadow-md fixed w-full top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <img src="static/logo.png" alt="Logo" class="w-40 h-10">
+        <img src="static/logo.png" alt="Logo" class="w-48 h-12"> <!-- logo agrandi -->
       </div>
+
+      <!-- Boutons de conversion -->
       <div class="flex-1 flex justify-center space-x-6">
         <a href="?tab=pdf2png" class="text-gray-700 hover:text-blue-500 font-medium">PDF → PNG</a>
         <a href="?tab=png2pdf" class="text-gray-700 hover:text-blue-500 font-medium">PNG → PDF</a>
@@ -22,15 +25,11 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="pt-40 max-w-3xl mx-auto p-6">
+  <main class="pt-48 max-w-3xl mx-auto p-6">
     <h1 class="text-3xl font-bold text-center mb-6">Convert Your File Free</h1>
 
     <div class="bg-white p-6 rounded-2xl shadow-md text-center">
       <input id="fileInput" type="file" class="mb-4" multiple />
-      <select id="tabSelect" class="mb-4 px-2 py-1 rounded border">
-        <option value="pdf2png">PDF → PNG</option>
-        <option value="png2pdf">PNG → PDF</option>
-      </select>
       <button onclick="uploadFiles()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
         Upload & Convert
       </button>
@@ -40,11 +39,14 @@
   </main>
 
   <script>
-    const backendURL = "https://pdf2png-5f8y.onrender.com";
+    const backendURL = "https://pdf2png-5f8y.onrender.com"; // backend Render
+
+    // Detecte le type depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get("tab") || "pdf2png";
 
     async function uploadFiles() {
       const files = document.getElementById("fileInput").files;
-      const tab = document.getElementById("tabSelect").value;
 
       if (files.length === 0) {
         alert("Please select at least one file.");
@@ -55,10 +57,10 @@
       formData.append("tab", tab);
 
       if (tab === "pdf2png") {
-        formData.append("file", files[0]); // PDF → PNG : un seul fichier
+        formData.append("file", files[0]); // PDF → PNG
       } else {
         for (let i = 0; i < files.length; i++) {
-          formData.append("files", files[i]); // PNG → PDF : multiple fichiers
+          formData.append("files", files[i]); // PNG → PDF
         }
       }
 
@@ -88,11 +90,10 @@
     }
   </script>
 
-
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 text-sm py-6 mt-12">
+    <p>All uploaded data is deleted after 1 hour.</p>
+    <p>© png2pdftool.com | <a href="/terms" class="underline hover:text-blue-500">Terms and Privacy</a></p>
+  </footer>
 </body>
-   <!-- FOOTER -->
-<footer class="text-center text-gray-500 text-sm py-6">
-  <p>All uploaded data is deleted after 1 hour.</p>
-  <p>© png2pdftool.com | <a href="/terms" class="text-blue-600 underline hover:text-blue-800">Terms and Privacy</a></p>
-</footer>
 </html>
