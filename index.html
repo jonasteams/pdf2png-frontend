@@ -59,7 +59,7 @@
       document.getElementById("downloadLink").classList.add("hidden");
 
       try {
-        const res = await fetch(`${backendURL}/upload`, {
+        const res = await fetch(`${backendURL}/convert`, {
           method: "POST",
           body: formData
         });
