@@ -3,36 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PDF ⇄ PNG Converter</title>
+  <title>PDF / PNG Tool</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-100 min-h-screen">
 
-  <!-- NAVBAR fixe -->
-  <nav class="bg-white shadow-md p-4 flex justify-center items-center">
-    <h1 class="text-xl font-bold text-gray-800">PDF ⇄ PNG Tool</h1>
+  <!-- NAVBAR fixe en haut -->
+  <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="static/logo.png" alt="Logo" class="w-8 h-8">
+        <span class="text-xl font-bold text-gray-800">PDF2PNG Tool</span>
+      </div>
+      <div class="space-x-4">
+        <a href="?tab=pdf2png" class="text-gray-700 hover:text-blue-500">PDF → PNG</a>
+        <a href="?tab=png2pdf" class="text-gray-700 hover:text-blue-500">PNG → PDF</a>
+      </div>
+    </div>
   </nav>
 
   <!-- CONTENU PRINCIPAL -->
-  <main class="flex-grow flex flex-col items-center justify-center p-6">
-    <div class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg">
-      <!-- Onglets -->
-      <div class="flex mb-4">
-        <button id="pdf2png-tab" class="w-1/2 py-2 font-semibold border-b-2 border-indigo-500 text-indigo-600">
-          PDF ➝ PNG
-        </button>
-        <button id="png2pdf-tab" class="w-1/2 py-2 font-semibold border-b-2 border-transparent text-gray-600">
-          PNG ➝ PDF
-        </button>
-      </div>
+  <main class="pt-20 max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Convert PDF ↔ PNG Online</h1>
 
-      <!-- Formulaire PDF -> PNG -->
-      <form id="pdf2png-form" class="space-y-4" enctype="multipart/form-data">
-        <input type="file" name="file" accept="application/pdf" class="block w-full text-sm text-gray-600" />
-        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg shadow hover:bg-indigo-700">
-          Convert PDF to PNG
-        </button>
-      </form>
+    <!-- Upload Form -->
+    <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+      <input id="fileInput" type="file" class="mb-4" multiple />
+      <button onclick="uploadFiles()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+        Upload & Convert
+      </button>
+      <p id="status" class="mt-4 text-gray-600"></p>
+      <a id="downloadLink" class="hidden mt-4 text-blue-600 font-bold underline">Download Result</a>
+    </div>
+  </main>
 
-      <!-- Formulaire PNG -> PDF -->
-      <form id="png2pdf-form" class="space-y-4 hidden" enctype
+  <script>
+    const backendURL = "https://pdf2png-5f8y.onrender.com"; // ton backend Render
+
+    async function uploadFiles() {
+      const files = document.getElementById("fileInput").files;
+      if (files.length === 0) {
+        alert("Please select a file.");
+        return;
+      }
+
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("file", files[i]);
+      }
+
+      document.getElementById("status").innerText = "Uploading & converting...";
+      document.getElementById("downloadLink").classList.add("hidden");
+
+      try {
+        const res = await fetch(`${backendURL}/upload`, {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) throw new Error("Conversion failed");
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        const downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = url;
+        downloadLink.download = "converted.zip";
+        downloadLink.classList.remove("hidden");
+        downloadLink.innerText = "⬇ Download your file";
+        document.getElementById("status").innerText = "Conversion complete!";
+      } catch (err) {
+        document.getElementById("status").innerText = "Error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
