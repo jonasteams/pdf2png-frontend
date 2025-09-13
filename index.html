@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PDF ⇄ PNG Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- NAVBAR fixe -->
+  <nav class="bg-white shadow-md p-4 flex justify-center items-center">
+    <h1 class="text-xl font-bold text-gray-800">PDF ⇄ PNG Tool</h1>
+  </nav>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="flex-grow flex flex-col items-center justify-center p-6">
+    <div class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg">
+      <!-- Onglets -->
+      <div class="flex mb-4">
+        <button id="pdf2png-tab" class="w-1/2 py-2 font-semibold border-b-2 border-indigo-500 text-indigo-600">
+          PDF ➝ PNG
+        </button>
+        <button id="png2pdf-tab" class="w-1/2 py-2 font-semibold border-b-2 border-transparent text-gray-600">
+          PNG ➝ PDF
+        </button>
+      </div>
+
+      <!-- Formulaire PDF -> PNG -->
+      <form id="pdf2png-form" class="space-y-4" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" class="block w-full text-sm text-gray-600" />
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg shadow hover:bg-indigo-700">
+          Convert PDF to PNG
+        </button>
+      </form>
+
+      <!-- Formulaire PNG -> PDF -->
+      <form id="png2pdf-form" class="space-y-4 hidden" enctype
