@@ -38,8 +38,7 @@
         const backendURL = "https://pdf2png-5f8y.onrender.com";
         let currentTab = "pdf2png"; // default // Buttons to switch conversion mode document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png")); document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf")); function switchTab(tab) { currentTab = tab; document.getElementById("title").innerText = tab === "pdf2png" ? "Convert PDF to PNG" : "Convert PNG(s) to PDF"; document.getElementById("fileInput").value = ""; document.getElementById("file-name").textContent = "No file chosen"; document.getElementById("downloadLink").classList.add("hidden"); // Update navbar highlight document.getElementById("pdf2pngBtn").className = tab === "pdf2png" ? "text-white" : "text-white/90 hover:text-white"; document.getElementById("png2pdfBtn").className = tab === "png2pdf" ? "text-white" : "text-white/90 hover:text-white"; } // Show selected file(s) document.getElementById("fileInput").addEventListener("change", function() { const files = Array.from(this.files).map(f => f.name).join(", "); document.getElementById("file-name").textContent = files || "No file chosen"; }); // Upload & Convert document.getElementById("convertBtn").addEventListener("click", async () => { const files = document.getElementById("fileInput").files; if (!files.length) { alert("Please select at least one file."); return; } const formData = new FormData(); formData.append("tab", currentTab); if (currentTab === "pdf2png") { formData.append("file", files[0]); } else { for (let f of files) formData.append("files", f); } document.getElementById("status").innerText = "Uploading & converting..."; document.getElementById("downloadLink").classList.add("hidden"); try { const res = await fetch(${backendURL}/convert, { method: "POST", body: formData }); if (!res.ok) throw new Error(Conversion failed: ${res.statusText}); const blob = await res.blob(); const url = URL.createObjectURL(blob); const downloadLink = document.getElementById("downloadLink"); downloadLink.href = url; downloadLink.download = currentTab === "pdf2png" ? "converted.zip" : "converted.pdf"; downloadLink.innerText = "⬇ Download your file"; downloadLink.classList.remove("hidden"); document.getElementById("status").innerText = "Conversion complete!"; } catch (err) { document.getElementById("status").innerText = "Error: " + err.message; } }); 
     </script>
-</body>
-<!-- Mobile banner (300x250) -->
+	<!-- Mobile banner (300x250) -->
 <div class="block lg:hidden fixed bottom-0 left-0 right-0 flex justify-center z-50">
   <a href="https://ym-iptv.store/subscriptions/" target="_blank">
     <img src="https://i.ibb.co/S4GxMd1f/Chat-GPT-Image-15-sept-2025-00-56-13.png"
@@ -47,6 +46,8 @@
          style="width:300px; height:250px; object-fit:cover;">
   </a>
 </div>
+
+</body>
 
 
 </html>
