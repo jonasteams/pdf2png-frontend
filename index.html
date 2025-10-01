@@ -2,49 +2,163 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>PDF to PNG & PNG to PDF Converter | Free Online Tool</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PDF to PNG & PNG to PDF Converter | Free Online Tool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col"> <!-- NAVBAR -->
-    <nav class="fixed top-0 left-0 w-full bg-blue-600 h-[80px] shadow z-50">
-        <div class="container mx-auto h-full flex items-center justify-between px-6">
-            <div class="flex items-start pt-2"> <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="w-[160px] h-auto object-contain"> </div>
-            <div class="flex-1 flex justify-center">
-                <div class="flex space-x-12 text-white text-lg font-semibold items-center"> <button id="pdf2pngBtn" class="text-white">PDF to PNG</button> <button id="png2pdfBtn" class="text-white/90 hover:text-white">PNG to PDF</button> </div>
-            </div>
-            <div class="w-[160px]"></div>
-        </div>
-    </nav> <!-- Left Banner --> <a href="https://ym-iptv.store/subscriptions/" target="_blank" class="hidden lg:block fixed top-20 left-10" style="width:300px; height:600px;"> <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png" alt="Left Banner" style="width:100%; height:100%; object-fit:cover;"> </a> <!-- CONTENT -->
-    <main class="flex-1 pt-[120px] flex justify-center">
-        <div class="w-full max-w-lg px-4">
-            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-                <h1 id="title" class="text-2xl font-bold text-gray-800 mb-6">Convert PDF to PNG</h1> <!-- File input -->
-                <div class="flex flex-col space-y-2 mb-4"> <label id="fileLabel" class="block p-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-pointer text-center"> Browse <input id="fileInput" type="file" class="hidden"> </label>
-                    <div id="file-name" class="text-gray-700 truncate">No file chosen</div>
-                </div> <button id="convertBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"> Upload & Convert </button>
-                <p id="status" class="mt-4 text-gray-600"></p> <a id="downloadLink" class="hidden mt-4 text-blue-600 font-bold underline"></a>
-            </div>
-        </div>
-    </main> <!-- Right Banner --> <a href="https://ym-iptv.store/subscriptions/" target="_blank" class="hidden lg:block fixed top-20 right-10" style="width:300px; height:600px;"> <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png" alt="Right Banner" style="width:100%; height:100%; object-fit:cover;"> </a> <!-- FOOTER -->
-    <footer class="text-center text-gray-500 text-sm py-6">
-        <p>All uploaded data is deleted after 1 hour.</p>
-        <p>© png2pdftool.com | <a href="/terms.html" class="text-blue-600 underline hover:text-blue-800">Terms and Privacy</a></p>
-    </footer>
-    <script>
-        const backendURL = "https://pdf2png-5f8y.onrender.com";
-        let currentTab = "pdf2png"; // default // Buttons to switch conversion mode document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png")); document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf")); function switchTab(tab) { currentTab = tab; document.getElementById("title").innerText = tab === "pdf2png" ? "Convert PDF to PNG" : "Convert PNG(s) to PDF"; document.getElementById("fileInput").value = ""; document.getElementById("file-name").textContent = "No file chosen"; document.getElementById("downloadLink").classList.add("hidden"); // Update navbar highlight document.getElementById("pdf2pngBtn").className = tab === "pdf2png" ? "text-white" : "text-white/90 hover:text-white"; document.getElementById("png2pdfBtn").className = tab === "png2pdf" ? "text-white" : "text-white/90 hover:text-white"; } // Show selected file(s) document.getElementById("fileInput").addEventListener("change", function() { const files = Array.from(this.files).map(f => f.name).join(", "); document.getElementById("file-name").textContent = files || "No file chosen"; }); // Upload & Convert document.getElementById("convertBtn").addEventListener("click", async () => { const files = document.getElementById("fileInput").files; if (!files.length) { alert("Please select at least one file."); return; } const formData = new FormData(); formData.append("tab", currentTab); if (currentTab === "pdf2png") { formData.append("file", files[0]); } else { for (let f of files) formData.append("files", f); } document.getElementById("status").innerText = "Uploading & converting..."; document.getElementById("downloadLink").classList.add("hidden"); try { const res = await fetch(${backendURL}/convert, { method: "POST", body: formData }); if (!res.ok) throw new Error(Conversion failed: ${res.statusText}); const blob = await res.blob(); const url = URL.createObjectURL(blob); const downloadLink = document.getElementById("downloadLink"); downloadLink.href = url; downloadLink.download = currentTab === "pdf2png" ? "converted.zip" : "converted.pdf"; downloadLink.innerText = "⬇ Download your file"; downloadLink.classList.remove("hidden"); document.getElementById("status").innerText = "Conversion complete!"; } catch (err) { document.getElementById("status").innerText = "Error: " + err.message; } }); 
-    </script>
-		<!-- Mobile banner (300x250) -->
-<div class="block lg:hidden fixed bottom-0 left-0 right-0 flex justify-center z-50">
-  <a href="https://ym-iptv.store/subscriptions/" target="_blank">
-    <img src="https://i.ibb.co/xSDJxRwj/fdfd.png"
-         alt="Mobile Banner"
-         style="width:300px; height:250px; object-fit:cover;">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 w-full bg-blue-600 h-[80px] shadow z-50">
+    <div class="container mx-auto h-full flex items-center px-6 relative">
+      <!-- Logo à gauche -->
+      <div class="flex items-center">
+        <img src="/static/logo.png" alt="PDF PNG Converter Logo"
+          class="w-[160px] h-auto object-contain">
+      </div>
+
+      <!-- Menu centré -->
+      <div
+        class="absolute left-1/2 transform -translate-x-1/2 flex space-x-8 text-white text-lg font-semibold">
+        <button id="pdf2pngBtn" class="text-white">PDF to PNG</button>
+        <button id="png2pdfBtn" class="text-white/90 hover:text-white">PNG to PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Left Banner (desktop only) -->
+  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
+    class="hidden lg:block fixed top-20 left-10"
+    style="width:300px; height:600px;">
+    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
+      alt="Left Banner"
+      style="width:100%; height:100%; object-fit:cover;">
   </a>
-</div>
+
+  <!-- CONTENT -->
+  <main class="flex-1 pt-[120px] flex justify-center">
+    <div class="w-full max-w-lg px-4">
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+        <h1 id="title" class="text-2xl font-bold text-gray-800 mb-6">Convert PDF to PNG</h1>
+        <!-- File input -->
+        <div class="flex flex-col space-y-2 mb-4">
+          <label id="fileLabel"
+            class="block p-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-pointer text-center">
+            Browse
+            <input id="fileInput" type="file" class="hidden">
+          </label>
+          <div id="file-name" class="text-gray-700 truncate">No file chosen</div>
+        </div>
+        <button id="convertBtn"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+          Upload & Convert
+        </button>
+        <p id="status" class="mt-4 text-gray-600"></p>
+        <a id="downloadLink" class="hidden mt-4 text-blue-600 font-bold underline"></a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Right Banner (desktop only) -->
+  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
+    class="hidden lg:block fixed top-20 right-10"
+    style="width:300px; height:600px;">
+    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
+      alt="Right Banner"
+      style="width:100%; height:100%; object-fit:cover;">
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 text-sm py-6">
+    <p>All uploaded data is deleted after 1 hour.</p>
+    <p>© png2pdftool.com |
+      <a href="/terms.html" class="text-blue-600 underline hover:text-blue-800">Terms and Privacy</a>
+    </p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const backendURL = "https://pdf2png-5f8y.onrender.com";
+    let currentTab = "pdf2png"; // default
+
+    // Switch buttons
+    document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png"));
+    document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf"));
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById("title").innerText =
+        tab === "pdf2png" ? "Convert PDF to PNG" : "Convert PNG(s) to PDF";
+
+      // reset
+      document.getElementById("fileInput").value = "";
+      document.getElementById("file-name").textContent = "No file chosen";
+      document.getElementById("downloadLink").classList.add("hidden");
+
+      // navbar active style
+      document.getElementById("pdf2pngBtn").className =
+        tab === "pdf2png" ? "text-white font-bold" : "text-white/90 hover:text-white";
+      document.getElementById("png2pdfBtn").className =
+        tab === "png2pdf" ? "text-white font-bold" : "text-white/90 hover:text-white";
+    }
+
+    // Show selected file(s)
+    document.getElementById("fileInput").addEventListener("change", function () {
+      const files = Array.from(this.files).map(f => f.name).join(", ");
+      document.getElementById("file-name").textContent = files || "No file chosen";
+    });
+
+    // Upload & Convert
+    document.getElementById("convertBtn").addEventListener("click", async () => {
+      const files = document.getElementById("fileInput").files;
+      if (!files.length) {
+        alert("Please select at least one file.");
+        return;
+      }
+
+      const formData = new FormData();
+      if (currentTab === "pdf2png") {
+        formData.append("file", files[0]);
+      } else {
+        for (let f of files) formData.append("file", f);
+      }
+
+      document.getElementById("status").innerText = "Uploading & converting...";
+      document.getElementById("downloadLink").classList.add("hidden");
+
+      try {
+        const res = await fetch(`${backendURL}/convert`, {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) throw new Error(`Conversion failed: ${res.statusText}`);
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        const downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = url;
+        downloadLink.download = currentTab === "pdf2png" ? "converted.zip" : "converted.pdf";
+        downloadLink.innerText = "⬇ Download your file";
+        downloadLink.classList.remove("hidden");
+
+        document.getElementById("status").innerText = "Conversion complete!";
+      } catch (err) {
+        document.getElementById("status").innerText = "Error: " + err.message;
+      }
+    });
+  </script>
+
+  <!-- Mobile banner (300x250) -->
+  <div class="block lg:hidden fixed bottom-0 left-0 right-10 flex justify-center z-50">
+    <a href="https://ym-iptv.store/subscriptions/" target="_blank">
+      <img src="https://i.ibb.co/xSDJxRwj/fdfd.png"
+        alt="Mobile Banner"
+        style="width:300px; height:250px; object-fit:cover;">
+    </a>
+  </div>
 </body>
 
 </html>
