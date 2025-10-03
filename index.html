@@ -11,18 +11,50 @@
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
   <!-- NAVBAR -->
-  <nav class="w-full bg-blue-600 shadow z-50 flex flex-col lg:flex-row items-center py-4 lg:py-0 lg:h-[80px] fixed top-0 left-0">
+<nav class="bg-blue-600 shadow fixed w-full z-50">
+  <div class="container mx-auto px-4 flex flex-col items-center justify-center py-4">
     <!-- Logo -->
-    <div class="flex justify-center w-full lg:w-auto mb-2 lg:mb-0">
-      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="w-[160px] h-auto object-contain">
+    <a href="/" class="mb-2">
+      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-12 w-auto">
+    </a>
+
+    <!-- Menu Desktop -->
+    <div class="hidden md:flex space-x-8 text-white font-medium text-lg">
+      <a href="/?tab=pdf2png" class="hover:text-gray-200 transition">PDF to PNG</a>
+      <a href="/?tab=png2pdf" class="hover:text-gray-200 transition">PNG to PDF</a>
+      <a href="/terms.html" class="hover:text-gray-200 transition">Terms</a>
     </div>
 
-    <!-- Menu -->
-    <div class="flex flex-col lg:flex-row w-full lg:w-auto justify-center space-y-2 lg:space-y-0 lg:space-x-8 text-base lg:text-lg">
-      <button id="pdf2pngBtn" class="text-white font-semibold py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none">PDF to PNG</button>
-      <button id="png2pdfBtn" class="text-white/90 hover:text-white font-semibold py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none">PNG to PDF</button>
-         </div>
-  </nav>
+    <!-- Mobile menu button -->
+    <div class="md:hidden">
+      <button id="menuBtn" class="text-white focus:outline-none">
+        <!-- icon -->
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" 
+             viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" 
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden md:hidden bg-blue-500 text-center">
+    <a href="/?tab=pdf2png" class="block py-2 text-white hover:bg-blue-700">PDF to PNG</a>
+    <a href="/?tab=png2pdf" class="block py-2 text-white hover:bg-blue-700">PNG to PDF</a>
+    <a href="/terms.html" class="block py-2 text-white hover:bg-blue-700">Terms</a>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+
 
   <!-- Left Banner (desktop only) -->
   <a href="https://ym-iptv.store/subscriptions/" target="_blank"
