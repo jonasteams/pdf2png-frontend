@@ -7,28 +7,25 @@
   <title>PDF to PNG & PNG to PDF Converter | Free Online Tool</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 <nav class="bg-blue-600 shadow fixed w-full z-50">
-  <div class="container mx-auto px-4 flex flex-col items-center justify-center py-4">
-    <!-- Logo -->
-    <a href="/" class="mb-2">
-      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-12 w-auto">
+  <div class="container mx-auto px-4 flex items-center justify-between h-16">
+    <!-- Logo à gauche -->
+    <a href="/">
+      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-10 w-auto">
     </a>
 
-    <!-- Menu Desktop -->
-    <div class="hidden md:flex space-x-8 text-white font-medium text-lg">
+    <!-- Menu Desktop centré -->
+    <div class="hidden md:flex space-x-8 text-white font-medium text-lg mx-auto">
       <a href="/?tab=pdf2png" class="hover:text-gray-200 transition">PDF to PNG</a>
       <a href="/?tab=png2pdf" class="hover:text-gray-200 transition">PNG to PDF</a>
-      <a href="/terms.html" class="hover:text-gray-200 transition">Terms</a>
-    </div>
+         </div>
 
-    <!-- Mobile menu button -->
+    <!-- Bouton mobile à droite -->
     <div class="md:hidden">
       <button id="menuBtn" class="text-white focus:outline-none">
-        <!-- icon -->
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" 
              viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" 
@@ -38,12 +35,11 @@
     </div>
   </div>
 
-  <!-- Mobile Menu -->
+  <!-- Menu Mobile -->
   <div id="mobileMenu" class="hidden md:hidden bg-blue-500 text-center">
     <a href="/?tab=pdf2png" class="block py-2 text-white hover:bg-blue-700">PDF to PNG</a>
     <a href="/?tab=png2pdf" class="block py-2 text-white hover:bg-blue-700">PNG to PDF</a>
-    <a href="/terms.html" class="block py-2 text-white hover:bg-blue-700">Terms</a>
-  </div>
+     </div>
 </nav>
 
 <script>
