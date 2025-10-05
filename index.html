@@ -1,181 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta name="description" content="convert PDF to PNG and PNG to PDF. Fast, secure, no installation required. All files are deleted after 1 hour.">
-<meta name="keywords" content="PDF to PNG, PNG to PDF, free converter, online tool, fast conversion, secure file conversion">
- <meta name="google-site-verification" content="G55PET9yTvKd56fDwZ55ysZfKJ-DkyNKZuMznhickSQ" />
-
+  <meta name="description" content="convert PDF to PNG and PNG to PDF. Fast, secure, no installation required. All files are deleted after 1 hour.">
+  <meta name="keywords" content="PDF to PNG, PNG to PDF, free converter, online tool, fast conversion, secure file conversion">
+  <meta name="google-site-verification" content="G55PET9yTvKd56fDwZ55ysZfKJ-DkyNKZuMznhickSQ" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PDF to PNG & PNG to PDF Converter | Free Online Tool</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
 <!-- NAVBAR -->
 <nav class="bg-blue-600 shadow fixed w-full z-50">
   <div class="container mx-auto px-4 flex items-center justify-between h-16">
-  
-     <!-- Logo à gauche -->
-<a href="/">
-  <img src="/static/logo.png" alt="PDF PNG Converter Logo" 
-       class="h-40 w-auto md:h-50">
-</a>
-    <!-- Menu Desktop centré -->
-    <div class="hidden md:flex space-x-8 text-white font-medium text-lg mx-auto">
-      <a href="/?tab=pdf2png" class="hover:text-gray-200 transition">PDF to PNG</a>
-      <a href="/?tab=png2pdf" class="hover:text-gray-200 transition">PNG to PDF</a>
-         </div>
+    
+    <!-- Logo -->
+    <a href="/">
+      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-10 w-auto">
+    </a>
 
-    <!-- Bouton mobile à droite -->
+    <!-- Center buttons -->
+    <div class="hidden md:flex space-x-6 text-white font-medium text-lg">
+      <button id="pdf2pngBtn" class="text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition">
+        PDF to PNG
+      </button>
+      <button id="png2pdfBtn" class="text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+        PNG to PDF
+      </button>
+    </div>
+
+    <!-- Mobile menu button -->
     <div class="md:hidden">
       <button id="menuBtn" class="text-white focus:outline-none">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" 
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" 
-                d="M4 6h16M4 12h16M4 18h16"/>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Menu Mobile -->
+  <!-- Mobile menu -->
   <div id="mobileMenu" class="hidden md:hidden bg-blue-500 text-center">
-    <a href="/?tab=pdf2png" class="block py-2 text-white hover:bg-blue-700">PDF to PNG</a>
-    <a href="/?tab=png2pdf" class="block py-2 text-white hover:bg-blue-700">PNG to PDF</a>
-     </div>
+    <button id="pdf2pngBtnMobile" class="block w-full py-2 text-white hover:bg-blue-700">PDF to PNG</button>
+    <button id="png2pdfBtnMobile" class="block w-full py-2 text-white hover:bg-blue-700">PNG to PDF</button>
+  </div>
 </nav>
 
 <script>
+  // Menu mobile toggle
   const btn = document.getElementById("menuBtn");
   const menu = document.getElementById("mobileMenu");
-
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
+  btn.addEventListener("click", () => menu.classList.toggle("hidden"));
 </script>
 
+<!-- CONTENT -->
+<main class="flex-1 mt-[120px] flex justify-center px-4">
+  <div class="w-full max-w-lg">
+    <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+      <h1 id="title" class="text-2xl font-bold text-gray-800 mb-6">Convert PDF to PNG</h1>
+      <p class="text-gray-700 mb-4">
+        Use our free online converter to easily convert PDF files to PNG images or combine PNGs into a single PDF. 
+        100% free, secure, and fast. No installation required.
+      </p>
 
-  <!-- Left Banner (desktop only) -->
-  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
-    class="hidden lg:block fixed top-20 left-10"
-    style="width:300px; height:600px;">
-    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
-      alt="Left Banner" style="width:100%; height:100%; object-fit:cover;">
-  </a>
-
-  <!-- CONTENT -->
-  <main class="flex-1 mt-[160px] flex justify-center px-4">
-    <div class="w-full max-w-lg">
-      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
-        <h1 id="title" class="text-2xl font-bold text-gray-800 mb-6">Convert PDF to PNG</h1>
-<p class="text-gray-700 mb-4">
-  Use our free online converter to easily convert PDF files to PNG images or combine PNGs into a single PDF. 
-  100% free, secure, and fast. No installation required.
-</p>
-
-        <!-- File input -->
-        <div class="flex flex-col space-y-2 mb-4">
-          <label id="fileLabel" class="block p-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-pointer text-center">
-            Browse
-            <input id="fileInput" type="file" class="hidden">
-          </label>
-          <div id="file-name" class="text-gray-700 truncate">No file chosen</div>
-        </div>
-
-        <button id="convertBtn"
-          class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-          Upload & Convert
-        </button>
-        <p id="status" class="mt-4 text-gray-600"></p>
-        <a id="downloadLink" class="hidden mt-4 text-blue-600 font-bold underline"></a>
+      <!-- File input -->
+      <div class="flex flex-col space-y-2 mb-4">
+        <label id="fileLabel" class="block p-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-pointer text-center">
+          Browse
+          <input id="fileInput" type="file" class="hidden">
+        </label>
+        <div id="file-name" class="text-gray-700 truncate">No file chosen</div>
       </div>
+
+      <!-- Convert button -->
+      <button id="convertBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Upload & Convert
+      </button>
+
+      <p id="status" class="mt-4 text-gray-600"></p>
+      <a id="downloadLink" class="hidden mt-4 text-blue-600 font-bold underline"></a>
     </div>
-  </main>
-
-  <!-- Right Banner (desktop only) -->
-  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
-    class="hidden lg:block fixed top-20 right-10"
-    style="width:300px; height:600px;">
-    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
-      alt="Right Banner" style="width:100%; height:100%; object-fit:cover;">
-  </a>
-
-  <!-- Mobile banner (300x250) -->
-  <div class="block lg:hidden fixed bottom-0 left-0 right-0 flex justify-center z-50">
-    <a href="https://ym-iptv.store/subscriptions/" target="_blank">
-      <img src="https://i.ibb.co/xSDJxRwj/fdfd.png" alt="Mobile Banner" style="width:300px; height:250px; object-fit:cover;">
-    </a>
   </div>
+</main>
 
-  <!-- FOOTER -->
-  <footer class="text-center text-gray-500 text-sm py-6 mt-4">
-    <p>All uploaded data is deleted after 1 hour.</p>
-    <p>© png2pdftool.com |
-      <a href="/terms.html" class="text-blue-600 underline hover:text-blue-800">Terms and Privacy</a>
-    </p>
-  </footer>
+<!-- FOOTER -->
+<footer class="text-center text-gray-500 text-sm py-6 mt-4">
+  <p>All uploaded data is deleted after 1 hour.</p>
+  <p>© png2pdftool.com |
+    <a href="/terms.html" class="text-blue-600 underline hover:text-blue-800">Terms and Privacy</a>
+  </p>
+</footer>
 
-  <!-- Script -->
-  <script>
-    const backendURL = "https://pdf2png-5f8y.onrender.com";
-    let currentTab = "pdf2png"; // default
+<!-- SCRIPT -->
+<script>
+  const backendURL = "https://pdf2png-5f8y.onrender.com";
+  let currentTab = "pdf2png";
 
-    // Switch buttons
-    document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png"));
-    document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf"));
+  // Tab switching
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById("title").innerText = 
+      tab === "pdf2png" ? "Convert PDF to PNG" : "Convert PNG(s) to PDF";
+    document.getElementById("fileInput").value = "";
+    document.getElementById("file-name").textContent = "No file chosen";
+    document.getElementById("downloadLink").classList.add("hidden");
+  }
 
-    function switchTab(tab) {
-      currentTab = tab;
-      document.getElementById("title").innerText =
-        tab === "pdf2png" ? "Convert PDF to PNG" : "Convert PNG(s) to PDF";
+  // Attach tab buttons
+  document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png"));
+  document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf"));
+  document.getElementById("pdf2pngBtnMobile").addEventListener("click", () => switchTab("pdf2png"));
+  document.getElementById("png2pdfBtnMobile").addEventListener("click", () => switchTab("png2pdf"));
 
-      document.getElementById("fileInput").value = "";
-      document.getElementById("file-name").textContent = "No file chosen";
-      document.getElementById("downloadLink").classList.add("hidden");
+  // File name display
+  document.getElementById("fileInput").addEventListener("change", function () {
+    const files = Array.from(this.files).map(f => f.name).join(", ");
+    document.getElementById("file-name").textContent = files || "No file chosen";
+  });
 
-      document.getElementById("pdf2pngBtn").className =
-        tab === "pdf2png" ? "text-white font-bold py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none" : "text-white/90 hover:text-white py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none";
-      document.getElementById("png2pdfBtn").className =
-        tab === "png2pdf" ? "text-white font-bold py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none" : "text-white/90 hover:text-white py-2 px-4 lg:py-0 lg:px-0 rounded lg:rounded-none";
+  // Convert function
+  document.getElementById("convertBtn").addEventListener("click", async () => {
+    const files = document.getElementById("fileInput").files;
+    if (!files.length) { alert("Please select at least one file."); return; }
+
+    const formData = new FormData();
+    if (currentTab === "pdf2png") formData.append("file", files[0]);
+    else for (let f of files) formData.append("file", f);
+
+    document.getElementById("status").innerText = "Uploading & converting...";
+    document.getElementById("downloadLink").classList.add("hidden");
+
+    try {
+      const res = await fetch(`${backendURL}/convert`, { method: "POST", body: formData });
+      if (!res.ok) throw new Error(`Conversion failed: ${res.statusText}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.getElementById("downloadLink");
+      downloadLink.href = url;
+      downloadLink.download = currentTab === "pdf2png" ? "converted.zip" : "converted.pdf";
+      downloadLink.innerText = "⬇ Download your file";
+      downloadLink.classList.remove("hidden");
+      document.getElementById("status").innerText = "Conversion complete!";
+    } catch (err) {
+      document.getElementById("status").innerText = "Error: " + err.message;
     }
-
-    // Show selected file(s)
-    document.getElementById("fileInput").addEventListener("change", function () {
-      const files = Array.from(this.files).map(f => f.name).join(", ");
-      document.getElementById("file-name").textContent = files || "No file chosen";
-    });
-
-    // Upload & Convert
-    document.getElementById("convertBtn").addEventListener("click", async () => {
-      const files = document.getElementById("fileInput").files;
-      if (!files.length) { alert("Please select at least one file."); return; }
-
-      const formData = new FormData();
-      if (currentTab === "pdf2png") formData.append("file", files[0]);
-      else for (let f of files) formData.append("file", f);
-
-      document.getElementById("status").innerText = "Uploading & converting...";
-      document.getElementById("downloadLink").classList.add("hidden");
-
-      try {
-        const res = await fetch(`${backendURL}/convert`, { method: "POST", body: formData });
-        if (!res.ok) throw new Error(`Conversion failed: ${res.statusText}`);
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        const downloadLink = document.getElementById("downloadLink");
-        downloadLink.href = url;
-        downloadLink.download = currentTab === "pdf2png" ? "converted.zip" : "converted.pdf";
-        downloadLink.innerText = "⬇ Download your file";
-        downloadLink.classList.remove("hidden");
-        document.getElementById("status").innerText = "Conversion complete!";
-      } catch (err) {
-        document.getElementById("status").innerText = "Error: " + err.message;
-      }
-    });
-  </script>
-
+  });
+</script>
 </body>
-
 </html>
