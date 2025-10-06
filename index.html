@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="convert PDF to PNG and PNG to PDF. Fast, secure, no installation required. All files are deleted after 1 hour.">
-  <meta name="keywords" content="PDF to PNG, PNG to PDF, free converter, online tool, fast conversion, secure file conversion">
-  <meta name="google-site-verification" content="G55PET9yTvKd56fDwZ55ysZfKJ-DkyNKZuMznhickSQ" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PDF to PNG & PNG to PDF Converter | Free Online Tool</title>
+  <meta name="description" content="Convert PDF to PNG and PNG to PDF. Fast, secure, no installation required. All files are deleted after 1 hour.">
+  <meta name="keywords" content="PDF to PNG, PNG to PDF, free converter, online tool, fast conversion, secure file conversion">
+  <meta name="google-site-verification" content="G55PET9yTvKd56fDwZ55ysZfKJ-DkyNKZuMznhickSQ" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
 <!-- NAVBAR -->
-<nav class="bg-blue-600 shadow fixed w-full z-50">
-  <div class="container mx-auto px-4 flex items-center justify-between h-16">
+<nav class="bg-blue-600 fixed w-full z-50 shadow">
+  <div class="container mx-auto flex items-center justify-between px-6 h-[90px]">
     
-    <!-- Logo -->
-      <a href="/">
-        <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-40 w-auto md:h-50">
-      </a>
-    <!-- Center buttons -->
-    <div class="hidden md:flex space-x-6 text-white font-medium text-lg">
-      <button id="pdf2pngBtn" class="text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition">
-        PDF to PNG
-      </button>
-      <button id="png2pdfBtn" class="text-white py-2 px-4 rounded hover:bg-blue-700 transition">
-        PNG to PDF
-      </button>
+    <!-- Logo (left) -->
+    <a href="/">
+      <img src="/static/logo.png" alt="PDF PNG Converter Logo" class="h-16 w-auto md:h-20">
+    </a>
+
+    <!-- Centered Buttons -->
+    <div class="absolute left-1/2 transform -translate-x-1/2">
+      <div class="hidden md:flex space-x-6">
+        <button id="pdf2pngBtn" class="bg-white/10 text-white px-5 py-2 rounded-lg hover:bg-white/20 transition font-medium backdrop-blur-sm">
+          PDF to PNG
+        </button>
+        <button id="png2pdfBtn" class="bg-white/10 text-white px-5 py-2 rounded-lg hover:bg-white/20 transition font-medium backdrop-blur-sm">
+          PNG to PDF
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile menu button -->
+    <!-- Mobile Menu Button -->
     <div class="md:hidden">
-      <button id="menuBtn" class="text-white focus:outline-none">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+      <button id="menuBtn" class="text-white text-3xl">☰</button>
     </div>
   </div>
 
-  <!-- Mobile menu -->
-  <div id="mobileMenu" class="hidden md:hidden bg-blue-500 text-center">
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden md:hidden bg-blue-500 text-center pb-2">
     <button id="pdf2pngBtnMobile" class="block w-full py-2 text-white hover:bg-blue-700">PDF to PNG</button>
     <button id="png2pdfBtnMobile" class="block w-full py-2 text-white hover:bg-blue-700">PNG to PDF</button>
   </div>
@@ -53,14 +52,16 @@
   const menu = document.getElementById("mobileMenu");
   btn.addEventListener("click", () => menu.classList.toggle("hidden"));
 </script>
-  <!-- Left Banner -->
-  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
-    class="hidden lg:block fixed top-20 left-10"
-    style="width:300px; height:600px;">
-    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
-      alt="Left Banner" style="width:100%; height:100%; object-fit:cover;">
-  </a>
-<!-- CONTENT -->
+
+<!-- LEFT BANNER -->
+<a href="https://ym-iptv.store/subscriptions/" target="_blank"
+  class="hidden lg:block fixed top-24 left-10"
+  style="width:300px; height:600px;">
+  <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
+    alt="Left Banner" style="width:100%; height:100%; object-fit:cover;">
+</a>
+
+<!-- MAIN CONTENT -->
 <main class="flex-1 mt-[120px] flex justify-center px-4">
   <div class="w-full max-w-lg">
     <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
@@ -89,20 +90,21 @@
     </div>
   </div>
 </main>
-  <!-- Right Banner -->
-  <a href="https://ym-iptv.store/subscriptions/" target="_blank"
-    class="hidden lg:block fixed top-20 right-10"
-    style="width:300px; height:600px;">
-    <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
-      alt="Right Banner" style="width:100%; height:100%; object-fit:cover;">
-  </a>
 
-  <!-- Mobile Banner -->
-  <div class="block lg:hidden fixed bottom-0 left-0 right-0 flex justify-center z-50">
-    <a href="https://ym-iptv.store/subscriptions/" target="_blank">
-      <img src="https://i.ibb.co/xSDJxRwj/fdfd.png" alt="Mobile Banner" style="width:300px; height:250px; object-fit:cover;">
-    </a>
-  </div>
+<!-- RIGHT BANNER -->
+<a href="https://ym-iptv.store/subscriptions/" target="_blank"
+  class="hidden lg:block fixed top-24 right-10"
+  style="width:300px; height:600px;">
+  <img src="https://i.ibb.co/pjs6LhFv/Chat-GPT-Image-15-sept-2025-00-56-13.png"
+    alt="Right Banner" style="width:100%; height:100%; object-fit:cover;">
+</a>
+
+<!-- MOBILE BANNER -->
+<div class="block lg:hidden fixed bottom-0 left-0 right-0 flex justify-center z-50">
+  <a href="https://ym-iptv.store/subscriptions/" target="_blank">
+    <img src="https://i.ibb.co/xSDJxRwj/fdfd.png" alt="Mobile Banner" style="width:300px; height:250px; object-fit:cover;">
+  </a>
+</div>
 
 <!-- FOOTER -->
 <footer class="text-center text-gray-500 text-sm py-6 mt-4">
@@ -117,7 +119,6 @@
   const backendURL = "https://pdf2png-5f8y.onrender.com";
   let currentTab = "pdf2png";
 
-  // Tab switching
   function switchTab(tab) {
     currentTab = tab;
     document.getElementById("title").innerText = 
@@ -127,19 +128,19 @@
     document.getElementById("downloadLink").classList.add("hidden");
   }
 
-  // Attach tab buttons
+  // Tab buttons
   document.getElementById("pdf2pngBtn").addEventListener("click", () => switchTab("pdf2png"));
   document.getElementById("png2pdfBtn").addEventListener("click", () => switchTab("png2pdf"));
   document.getElementById("pdf2pngBtnMobile").addEventListener("click", () => switchTab("pdf2png"));
   document.getElementById("png2pdfBtnMobile").addEventListener("click", () => switchTab("png2pdf"));
 
-  // File name display
+  // File display
   document.getElementById("fileInput").addEventListener("change", function () {
     const files = Array.from(this.files).map(f => f.name).join(", ");
     document.getElementById("file-name").textContent = files || "No file chosen";
   });
 
-  // Convert function
+  // Convert logic
   document.getElementById("convertBtn").addEventListener("click", async () => {
     const files = document.getElementById("fileInput").files;
     if (!files.length) { alert("Please select at least one file."); return; }
@@ -167,5 +168,6 @@
     }
   });
 </script>
+
 </body>
 </html>
